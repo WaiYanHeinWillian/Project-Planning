@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-for="project in projects" v-bind:key="project.id">
-      <SingleProject v-bind:projectly="project"></SingleProject>
+      <SingleProject v-bind:projectly="project" v-on:deleting="deleteProject"></SingleProject>
     </div>
   </div>
 </template>
@@ -16,6 +16,14 @@ export default {
   data(){
     return{
       projects:[],
+    }
+  },
+
+  methods:{
+    deleteProject(id){
+      this.projects=this.projects.filter(loopProject=>{
+        return loopProject.id!=id;
+      })
     }
   },
 

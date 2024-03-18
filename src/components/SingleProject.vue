@@ -5,7 +5,7 @@
                 <h3 v-on:click="showDetailFun">{{projectly.title}}</h3>
             </div>
             <div>
-                <span class="material-icons">
+                <span class="material-icons" @click="deleteProject">
                  delete
                 </span>
                 <span class="material-icons">
@@ -27,12 +27,24 @@ export default {
     data(){
         return{
             showDetail:false,
+            api:'http://localhost:3000/projects/',
         }
     },
 
     methods:{
         showDetailFun(){
             return this.showDetail=!this.showDetail
+        },
+        deleteProject(){
+            let dleteApiPj=this.api+this.projectly.id;
+            fetch(dleteApiPj,{method:"DELETE"})
+            .then(()=>{
+                this.$emit("deleting",this.projectly.id)
+            })
+            .catch((err)=>{
+                console.log(err.message)
+            })
+            
         }
     }
 }
