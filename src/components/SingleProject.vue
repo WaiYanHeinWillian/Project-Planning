@@ -1,5 +1,5 @@
 <template>
-    <div class="project">
+    <div class="project" v-bind:class="{completeColor:this.projectly.complete}">
         <div class="flexing">
             <div>
                 <h3 v-on:click="showDetailFun">{{projectly.title}}</h3>
@@ -17,6 +17,7 @@
             </div>
         </div>
         <p v-if="showDetail">{{projectly.detail}}</p> 
+        
     </div>
 </template>
 
@@ -74,5 +75,8 @@ export default {
     span:hover{
         color: #777;
         cursor: pointer;
+    }
+    .completeColor{
+        border-left-color: green;
     }
 </style>
