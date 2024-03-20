@@ -1,5 +1,5 @@
 <template>
-    <div class="project" v-bind:class="{completeColor:this.projectly.complete}">
+    <div class="project" :class={completeColor:this.projectly.complete}>
         <div class="flexing">
             <div>
                 <h3 v-on:click="showDetailFun">{{projectly.title}}</h3>
@@ -11,13 +11,13 @@
                 <span class="material-icons">
                  edit
                 </span>
-                <span class="material-icons">
+                <span class="material-icons" v-on:click="completeProject">
                  done
                 </span>     
             </div>
         </div>
         <p v-if="showDetail">{{projectly.detail}}</p> 
-        
+        {{this.projectly.complete}}
     </div>
 </template>
 
@@ -45,7 +45,26 @@ export default {
             .catch((err)=>{
                 console.log(err.message)
             })
-            
+        },
+        completeProject(){
+            let updCompRoute=this.api+this.projectly.id;
+            fetch(updCompRoute,{
+                method:"PATCH",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(
+                    {
+                        complete:!this.projectly.complete
+                    }
+                )
+            })
+            .then(()=>{
+                this.$emit("updCompProj",this.projectly.id);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })          
         }
     }
 }

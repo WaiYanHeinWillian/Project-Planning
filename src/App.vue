@@ -1,10 +1,22 @@
 <template>
-  <nav>
-    <router-link to="/" class="home">Home</router-link>
-    
-  </nav>
+  <!-- <nav>
+    <router-link to="/">Home</router-link>    
+  </nav> -->
+  <NavBar></NavBar>
   <router-view/>
 </template>
+
+<script>
+
+import NavBar from './components/NavBar.vue'
+
+export default{
+  components:{
+    NavBar:NavBar,
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -16,10 +28,10 @@
   color: #2c3e50;
 }
 
-.home{
+/* .home{
   text-decoration: none;
   font-weight: bold;
   color: black;
-}
+} */
 
 </style>
