@@ -1,15 +1,18 @@
 <template>
   <h1>Home</h1>
+  <FilterNav @filterNavData="curNav=$event" v-bind:curNavRe="curNav"></FilterNav>
   <div class="home">
     <div v-for="project in projects" v-bind:key="project.id">
       <SingleProject v-bind:projectly="project" v-on:deleting="deleteProject" @updCompProj="CompProject"></SingleProject>
     </div>
+      {{curNav}}
   </div>
 </template>
 
 <script>
 
 
+import FilterNav from '../components/FilterNav'
 import SingleProject from '../components/SingleProject'
 export default {
   name: 'HomeView',
@@ -17,6 +20,7 @@ export default {
   data(){
     return{
       projects:[],
+      curNav:'all'
     }
   },
 
@@ -36,6 +40,7 @@ export default {
   },
 
   components: {
+    FilterNav,
     SingleProject,
     
   },
