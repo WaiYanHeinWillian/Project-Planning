@@ -16,6 +16,12 @@
       "id": "3",
       "title": "project title 3",
       "detail": "project detail 3",
+      "complete": true
+    },
+    {
+      "id": "6b86",
+      "title": "project 4",
+      "detail": "project detail 4",
       "complete": false
     }
   ]

@@ -2,7 +2,7 @@
   <h1>Home</h1>
   <FilterNav @filterNavData="curNav=$event" v-bind:curNavRe="curNav"></FilterNav>
   <div class="home">
-    <div v-for="project in projects" v-bind:key="project.id">
+    <div v-for="project in filteredProject" v-bind:key="project.id">
       <SingleProject v-bind:projectly="project" v-on:deleting="deleteProject" @updCompProj="CompProject"></SingleProject>
     </div>
       {{curNav}}
@@ -44,6 +44,23 @@ export default {
     SingleProject,
     
   },
+
+  computed:{
+    filteredProject(){
+    if(this.curNav==='complete'){
+      return this.projects.filter(lopPro=>{
+        return lopPro.complete
+      })
+    };
+    if(this.curNav==='ongoing'){
+      return this.projects.filter(loopPro=>{
+        return !loopPro.complete
+      })
+    };
+    return this.projects
+  },
+  },
+
   mounted(){
     fetch('http://localhost:3000/projects')
     .then((response)=>{
